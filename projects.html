@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>项目 · Jiale</title>
+    <style>
+      :root {
+        --bg: #f6f8fb;
+        --surface: #ffffff;
+        --text-main: #1f2328;
+        --text-sub: #57606a;
+        --line: #d0d7de;
+        --primary: #0969da;
+        --primary-soft: #ddf4ff;
+        --radius: 14px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --surface: #161b22;
+          --text-main: #e6edf3;
+          --text-sub: #9da7b3;
+          --line: #30363d;
+          --primary: #58a6ff;
+          --primary-soft: #0c2d6b;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: var(--bg);
+        color: var(--text-main);
+      }
+      .container { width: min(960px, 92vw); margin: 0 auto; }
+      .topbar {
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(10px);
+        background: color-mix(in srgb, var(--bg) 90%, transparent);
+        border-bottom: 1px solid var(--line);
+      }
+      .topbar-inner {
+        height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand { font-weight: 700; }
+      .nav { display: flex; gap: 12px; }
+      .nav a {
+        text-decoration: none;
+        color: var(--text-sub);
+        padding: 8px 12px;
+        border-radius: 999px;
+      }
+      .nav a.active,
+      .nav a:hover { background: var(--primary-soft); color: var(--primary); }
+      .main { padding: 56px 0; }
+      .grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 20px;
+      }
+      .card h3 { margin: 0 0 8px; }
+      .card p { margin: 0; color: var(--text-sub); line-height: 1.7; }
+      .tag {
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 0.82rem;
+        color: var(--primary);
+        background: var(--primary-soft);
+        padding: 4px 8px;
+        border-radius: 999px;
+      }
+      @media (max-width: 800px) {
+        .topbar-inner {
+          height: auto;
+          padding: 10px 0;
+          gap: 8px;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">Jiale · Web</div>
+        <nav class="nav">
+          <a href="./index.html">首页</a>
+          <a href="./about.html">关于</a>
+          <a class="active" href="./projects.html">项目</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container main">
+      <section class="grid">
+        <article class="card">
+          <h3>项目 A：Landing Page</h3>
+          <p>主打品牌展示与转化，包含多页面结构和统一导航体验。</p>
+          <span class="tag">HTML/CSS</span>
+        </article>
+        <article class="card">
+          <h3>项目 B：组件实验页</h3>
+          <p>使用 Vue 3 CDN 快速实现交互模块，适合原型验证场景。</p>
+          <span class="tag">Vue 3</span>
+        </article>
+        <article class="card">
+          <h3>项目 C：作品集页面</h3>
+          <p>按主题组织项目卡片，信息层级清晰，便于持续维护。</p>
+          <span class="tag">Portfolio</span>
+        </article>
+        <article class="card">
+          <h3>项目 D：GitHub Pages 部署</h3>
+          <p>纯静态页面可直接部署，无需服务端，发布流程简单。</p>
+          <span class="tag">Deploy</span>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

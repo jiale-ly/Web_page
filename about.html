@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>关于我 · Jiale</title>
+    <style>
+      :root {
+        --bg: #f6f8fb;
+        --surface: #ffffff;
+        --text-main: #1f2328;
+        --text-sub: #57606a;
+        --line: #d0d7de;
+        --primary: #0969da;
+        --primary-soft: #ddf4ff;
+        --radius: 14px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --surface: #161b22;
+          --text-main: #e6edf3;
+          --text-sub: #9da7b3;
+          --line: #30363d;
+          --primary: #58a6ff;
+          --primary-soft: #0c2d6b;
+        }
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: var(--bg);
+        color: var(--text-main);
+      }
+      .container { width: min(960px, 92vw); margin: 0 auto; }
+      .topbar {
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(10px);
+        background: color-mix(in srgb, var(--bg) 90%, transparent);
+        border-bottom: 1px solid var(--line);
+      }
+      .topbar-inner {
+        height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand { font-weight: 700; }
+      .nav { display: flex; gap: 12px; }
+      .nav a {
+        text-decoration: none;
+        color: var(--text-sub);
+        padding: 8px 12px;
+        border-radius: 999px;
+      }
+      .nav a.active,
+      .nav a:hover { background: var(--primary-soft); color: var(--primary); }
+      .main { padding: 56px 0; }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px;
+      }
+      h1 { margin-top: 0; }
+      p, li { color: var(--text-sub); line-height: 1.8; }
+      ul { margin: 0; padding-left: 18px; }
+      .footer {
+        margin-top: 24px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+        color: var(--text-sub);
+      }
+      @media (max-width: 800px) {
+        .topbar-inner {
+          height: auto;
+          padding: 10px 0;
+          gap: 8px;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">Jiale · Web</div>
+        <nav class="nav">
+          <a href="./index.html">首页</a>
+          <a class="active" href="./about.html">关于</a>
+          <a href="./projects.html">项目</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container main">
+      <article class="card">
+        <h1>关于这个站点</h1>
+        <p>
+          这是一个“简单多页面”模板，适合个人主页、课程展示或轻量产品介绍页。每个页面独立、链接清晰，便于搜索引擎索引。
+        </p>
+        <ul>
+          <li>页面结构：`index.html`、`about.html`、`projects.html`</li>
+          <li>技术组合：HTML + CSS + 少量 Vue 3（CDN）</li>
+          <li>部署方式：可直接放到 GitHub Pages</li>
+        </ul>
+        <p class="footer">你可以继续新增 `contact.html`、`blog.html` 等页面。</p>
+      </article>
+    </main>
+  </body>
+</html>
