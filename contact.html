@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>关于我 · Jiale</title>
+    <title>联系 · Jiale</title>
     <style>
       :root {
         --bg: #f6f8fb;
@@ -58,20 +58,37 @@
       .nav a.active,
       .nav a:hover { background: var(--primary-soft); color: var(--primary); }
       .main { padding: 56px 0; }
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
       .card {
         background: var(--surface);
         border: 1px solid var(--line);
         border-radius: var(--radius);
-        padding: 24px;
+        padding: 22px;
       }
-      h1 { margin-top: 0; }
-      p, li { color: var(--text-sub); line-height: 1.8; }
-      ul { margin: 0; padding-left: 18px; }
-      .footer {
-        margin-top: 24px;
-        padding-top: 20px;
-        border-top: 1px solid var(--line);
+      h1, h2 { margin: 0 0 10px; }
+      p { margin: 0; color: var(--text-sub); line-height: 1.8; }
+      .info-list {
+        margin: 12px 0 0;
+        padding-left: 18px;
         color: var(--text-sub);
+        line-height: 1.9;
+      }
+      .btn {
+        margin-top: 14px;
+        display: inline-block;
+        text-decoration: none;
+        border: 1px solid var(--primary);
+        color: #fff;
+        background: var(--primary);
+        border-radius: 10px;
+        padding: 10px 14px;
+      }
+      @media (max-width: 900px) {
+        .layout { grid-template-columns: 1fr; }
       }
       @media (max-width: 800px) {
         .topbar-inner {
@@ -90,26 +107,35 @@
         <div class="brand">Jiale · Web</div>
         <nav class="nav">
           <a href="./index.html">首页</a>
-          <a class="active" href="./about.html">关于</a>
+          <a href="./about.html">关于</a>
           <a href="./projects.html">项目</a>
-          <a href="./contact.html">联系</a>
+          <a class="active" href="./contact.html">联系</a>
         </nav>
       </div>
     </header>
 
     <main class="container main">
-      <article class="card">
-        <h1>关于这个站点</h1>
-        <p>
-          这是一个“简单多页面”模板，适合个人主页、课程展示或轻量产品介绍页。每个页面独立、链接清晰，便于搜索引擎索引。
-        </p>
-        <ul>
-          <li>页面结构：index.html、about.html、projects.html、contact.html</li>
-          <li>技术组合：HTML + CSS + 少量 Vue 3（CDN）</li>
-          <li>部署方式：可直接放到 GitHub Pages</li>
-        </ul>
-        <p class="footer">你可以继续新增 blog.html 等页面继续扩展。</p>
-      </article>
+      <section class="layout">
+        <article class="card">
+          <h1>联系我</h1>
+          <p>如果你想合作开发网页、优化前端体验，或者一起做一个小项目，可以通过以下方式联系我。</p>
+          <ul class="info-list">
+            <li>GitHub: https://github.com/jiale-ly</li>
+            <li>Email: your-email@example.com</li>
+            <li>Location: China</li>
+          </ul>
+          <a class="btn" href="mailto:your-email@example.com">发送邮件</a>
+        </article>
+
+        <article class="card">
+          <h2>建议沟通内容</h2>
+          <ul class="info-list">
+            <li>你的项目目标与上线时间</li>
+            <li>目前已有的页面或设计稿</li>
+            <li>希望实现的交互效果和技术栈</li>
+          </ul>
+        </article>
+      </section>
     </main>
   </body>
 </html>

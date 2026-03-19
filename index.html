@@ -36,7 +36,7 @@
         color: var(--text-main);
       }
       .container {
-        width: min(960px, 92vw);
+        width: min(1180px, 94vw);
         margin: 0 auto;
       }
       .topbar {
@@ -74,6 +74,11 @@
       .hero {
         padding: 56px 0 22px;
       }
+      .hero-layout {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 14px;
+      }
       .card {
         background: color-mix(in srgb, var(--surface) 92%, transparent);
         border: 1px solid var(--line);
@@ -101,6 +106,8 @@
         border-radius: 10px;
         padding: 10px 14px;
         color: var(--text-main);
+        background: transparent;
+        cursor: pointer;
       }
       .btn.primary {
         background: var(--primary);
@@ -145,12 +152,35 @@
         text-decoration: none;
         font-size: 0.92rem;
       }
+      .stats {
+        display: grid;
+        gap: 10px;
+      }
+      .stat {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+        background: var(--surface);
+      }
+      .stat strong {
+        font-size: 1.2rem;
+      }
+      .stat p {
+        margin: 4px 0 0;
+        color: var(--text-sub);
+      }
       .footer {
         margin-top: 26px;
         padding: 24px 0 36px;
         border-top: 1px solid var(--line);
         color: var(--text-sub);
         font-size: 0.9rem;
+      }
+      @media (max-width: 900px) {
+        .hero-layout,
+        .grid {
+          grid-template-columns: 1fr;
+        }
       }
       @media (max-width: 800px) {
         .topbar-inner {
@@ -159,9 +189,6 @@
           flex-direction: column;
           align-items: flex-start;
           gap: 8px;
-        }
-        .grid {
-          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -174,25 +201,47 @@
           <a class="active" href="./index.html">首页</a>
           <a href="./about.html">关于</a>
           <a href="./projects.html">项目</a>
+          <a href="./contact.html">联系</a>
         </nav>
       </div>
     </header>
 
     <main class="container">
       <section class="hero">
-        <article class="card">
-          <h1>简单多页面跳转示例 👋</h1>
-          <p class="subtitle">当前已经从单页锚点改为真实多页面结构，你可以在“首页 / 关于 / 项目”之间直接跳转，并用于 GitHub Pages 部署。</p>
-          <div class="actions">
-            <a class="btn primary" href="./projects.html">查看项目页</a>
-            <a class="btn" href="./about.html">进入关于页</a>
-          </div>
-          <div class="quick-nav">
-            <a href="./index.html">→ 首页</a>
-            <a href="./about.html">→ 关于</a>
-            <a href="./projects.html">→ 项目</a>
-          </div>
-        </article>
+        <div class="hero-layout">
+          <article class="card">
+            <h1>简单多页面跳转示例 👋</h1>
+            <p class="subtitle">当前已经从单页锚点改为真实多页面结构，你可以在“首页 / 关于 / 项目 / 联系”之间直接跳转，并用于 GitHub Pages 部署。</p>
+            <div class="actions">
+              <a class="btn primary" href="./projects.html">查看项目页</a>
+              <a class="btn" href="./about.html">进入关于页</a>
+            </div>
+            <div class="quick-nav">
+              <a href="./index.html">→ 首页</a>
+              <a href="./about.html">→ 关于</a>
+              <a href="./projects.html">→ 项目</a>
+              <a href="./contact.html">→ 联系</a>
+            </div>
+          </article>
+
+          <aside class="card">
+            <h2>站点概览</h2>
+            <div class="stats" style="margin-top: 12px">
+              <article class="stat">
+                <strong>4</strong>
+                <p>独立页面</p>
+              </article>
+              <article class="stat">
+                <strong>Vue 3</strong>
+                <p>CDN 轻量接入</p>
+              </article>
+              <article class="stat">
+                <strong>100%</strong>
+                <p>静态可部署</p>
+              </article>
+            </div>
+          </aside>
+        </div>
       </section>
 
       <section class="section">
