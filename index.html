@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub Pages 示例</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: #f6f8fa;
+      }
+      .card {
+        width: min(680px, 92vw);
+        background: #ffffff;
+        border: 1px solid #d0d7de;
+        border-radius: 14px;
+        padding: 28px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: 1.8rem;
+      }
+      p {
+        margin: 0;
+        line-height: 1.7;
+        color: #57606a;
+      }
+      .badge {
+        margin-top: 16px;
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        background: #ddf4ff;
+        color: #0550ae;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #0d1117;
+        }
+        .card {
+          background: #161b22;
+          border-color: #30363d;
+          box-shadow: none;
+        }
+        p {
+          color: #9da7b3;
+        }
+        .badge {
+          background: #0c2d6b;
+          color: #c9d1d9;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <h1>你好，GitHub Pages 👋</h1>
+      <p>这是一个最简静态网页示例。你现在看到的页面会通过 GitHub Actions 自动部署到 GitHub Pages。</p>
+      <span class="badge">部署日期：2026-03-19</span>
+    </main>
+  </body>
+</html>
