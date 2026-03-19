@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>关于我 · Jiale</title>
+    <title>个人简历 · Jiale</title>
     <style>
       :root {
         --bg: #f6f8fb;
@@ -64,14 +64,70 @@
         border-radius: var(--radius);
         padding: 24px;
       }
-      h1 { margin-top: 0; }
-      p, li { color: var(--text-sub); line-height: 1.8; }
-      ul { margin: 0; padding-left: 18px; }
+      h1 { margin-top: 0; margin-bottom: 12px; }
+      h2 {
+        margin: 0 0 10px;
+        font-size: 1.05rem;
+      }
+      p,
+      li {
+        color: var(--text-sub);
+        line-height: 1.8;
+      }
+      ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+      .intro {
+        margin-bottom: 16px;
+      }
+      .layout {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+      .section {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 16px;
+        background: color-mix(in srgb, var(--surface) 90%, transparent);
+      }
+      .section + .section {
+        margin-top: 12px;
+      }
+      .meta {
+        color: var(--text-main);
+        font-weight: 600;
+      }
+      .timeline {
+        margin-top: 8px;
+      }
+      .timeline p {
+        margin: 0 0 10px;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .tag {
+        font-size: 0.86rem;
+        padding: 4px 10px;
+        border-radius: 999px;
+        color: var(--primary);
+        background: var(--primary-soft);
+        border: 1px solid color-mix(in srgb, var(--primary) 25%, var(--line));
+      }
       .footer {
         margin-top: 24px;
         padding-top: 20px;
         border-top: 1px solid var(--line);
         color: var(--text-sub);
+      }
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
       }
       @media (max-width: 800px) {
         .topbar-inner {
@@ -99,16 +155,82 @@
 
     <main class="container main">
       <article class="card">
-        <h1>关于这个站点</h1>
-        <p>
-          这是一个“简单多页面”模板，适合个人主页、课程展示或轻量产品介绍页。每个页面独立、链接清晰，便于搜索引擎索引。
+        <h1>个人简历介绍</h1>
+        <p class="intro">
+          你好，我是 Jiale，前端开发方向，关注用户体验与工程效率的平衡。具备从页面搭建、交互实现到上线部署的完整实践经验，能够在明确目标后快速交付可维护的 Web 页面。
         </p>
-        <ul>
-          <li>页面结构：index.html、about.html、projects.html、contact.html</li>
-          <li>技术组合：HTML + CSS + 少量 Vue 3（CDN）</li>
-          <li>部署方式：可直接放到 GitHub Pages</li>
-        </ul>
-        <p class="footer">你可以继续新增 blog.html 等页面继续扩展。</p>
+
+        <section class="layout">
+          <div>
+            <div class="section">
+              <h2>教育背景</h2>
+              <div class="timeline">
+                <p>
+                  <span class="meta">XX 大学 · 计算机相关专业 · 本科</span><br />
+                  2022.09 - 2026.06（预计）<br />
+                  主修课程：数据结构、计算机网络、数据库原理、Web 前端开发、软件工程
+                </p>
+                <p>
+                  在校期间持续参与课程项目与个人项目实践，注重代码规范、组件复用和页面性能优化。
+                </p>
+              </div>
+            </div>
+
+            <div class="section">
+              <h2>项目经历</h2>
+              <ul>
+                <li>
+                  <span class="meta">个人多页面作品集网站</span>：独立完成信息架构、视觉样式、页面跳转与交互模块，支持静态部署。
+                </li>
+                <li>
+                  <span class="meta">活动宣传页开发</span>：根据需求快速搭建落地页，优化首屏结构与按钮路径，提升内容可读性。
+                </li>
+                <li>
+                  <span class="meta">前端组件实验页</span>：基于 Vue 3（CDN）实现卡片切换、轮播、状态更新等轻交互能力。
+                </li>
+              </ul>
+            </div>
+
+            <div class="section">
+              <h2>自我评价</h2>
+              <p>
+                学习主动性强，能根据项目目标快速拆解任务并推进落地；沟通清晰，重视协作反馈；对页面细节、可维护性与用户体验保持长期关注。
+              </p>
+            </div>
+          </div>
+
+          <aside>
+            <div class="section">
+              <h2>求职方向</h2>
+              <p>前端开发实习 / 初级前端工程师</p>
+            </div>
+
+            <div class="section">
+              <h2>核心技能</h2>
+              <div class="tags">
+                <span class="tag">HTML5</span>
+                <span class="tag">CSS3</span>
+                <span class="tag">JavaScript ES6+</span>
+                <span class="tag">Vue 3</span>
+                <span class="tag">响应式布局</span>
+                <span class="tag">Git / GitHub</span>
+                <span class="tag">页面性能优化</span>
+                <span class="tag">组件化思维</span>
+              </div>
+            </div>
+
+            <div class="section">
+              <h2>补充信息</h2>
+              <ul>
+                <li>英语能力：可阅读英文技术文档</li>
+                <li>可到岗时间：可协商</li>
+                <li>工作地点：支持远程 / 线下协同</li>
+              </ul>
+            </div>
+          </aside>
+        </section>
+
+        <p class="footer">建议将学校名称、在校时间、邮箱和电话替换为你的真实信息后再用于投递。</p>
       </article>
     </main>
   </body>
