@@ -3,69 +3,353 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GitHub Pages 示例</title>
+    <title>个人主页示例</title>
     <style>
       :root {
-        color-scheme: light dark;
+        --bg: #f6f8fb;
+        --surface: #ffffff;
+        --text-main: #1f2328;
+        --text-sub: #57606a;
+        --line: #d0d7de;
+        --primary: #0969da;
+        --primary-soft: #ddf4ff;
+        --radius: 14px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --surface: #161b22;
+          --text-main: #e6edf3;
+          --text-sub: #9da7b3;
+          --line: #30363d;
+          --primary: #58a6ff;
+          --primary-soft: #0c2d6b;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
       }
       body {
         margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
         font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-        background: #f6f8fa;
+        background: var(--bg);
+        color: var(--text-main);
+      }
+      .container {
+        width: min(1080px, 92vw);
+        margin: 0 auto;
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(8px);
+        background: color-mix(in srgb, var(--bg) 90%, transparent);
+        border-bottom: 1px solid var(--line);
+      }
+      .topbar-inner {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+      .nav {
+        display: flex;
+        gap: 18px;
+      }
+      .nav a {
+        color: var(--text-sub);
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+      .nav a:hover {
+        color: var(--primary);
+      }
+      section {
+        scroll-margin-top: 84px;
+      }
+      .hero {
+        padding: 64px 0 28px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        gap: 18px;
       }
       .card {
-        width: min(680px, 92vw);
-        background: #ffffff;
-        border: 1px solid #d0d7de;
-        border-radius: 14px;
-        padding: 28px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 24px;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
       }
-      h1 {
-        margin: 0 0 10px;
-        font-size: 1.8rem;
-      }
-      p {
+      .hero h1 {
         margin: 0;
-        line-height: 1.7;
-        color: #57606a;
+        font-size: clamp(1.75rem, 2.5vw, 2.3rem);
       }
-      .badge {
+      .subtitle {
+        margin-top: 10px;
+        color: var(--text-sub);
+        line-height: 1.7;
+      }
+      .chips {
         margin-top: 16px;
-        display: inline-block;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
         padding: 6px 12px;
         border-radius: 999px;
+        background: var(--primary-soft);
+        color: var(--primary);
         font-size: 0.85rem;
-        background: #ddf4ff;
-        color: #0550ae;
       }
-      @media (prefers-color-scheme: dark) {
-        body {
-          background: #0d1117;
+      .actions {
+        margin-top: 18px;
+        display: flex;
+        gap: 12px;
+      }
+      .btn {
+        text-decoration: none;
+        font-size: 0.9rem;
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        color: var(--text-main);
+      }
+      .btn.primary {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+      .section {
+        padding: 14px 0;
+      }
+      .section h2 {
+        font-size: 1.2rem;
+        margin: 0 0 12px;
+      }
+      .about p {
+        margin: 0;
+        line-height: 1.7;
+        color: var(--text-sub);
+      }
+      .grid-2 {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .list {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--text-sub);
+        line-height: 1.9;
+      }
+      .project-list {
+        display: grid;
+        gap: 12px;
+      }
+      .project-item {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px;
+        background: color-mix(in srgb, var(--surface) 94%, var(--primary-soft) 6%);
+      }
+      .project-item strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+      .project-item p {
+        margin: 0;
+        color: var(--text-sub);
+        line-height: 1.7;
+      }
+      .footer {
+        margin-top: 26px;
+        padding: 28px 0 40px;
+        border-top: 1px solid var(--line);
+        color: var(--text-sub);
+        font-size: 0.9rem;
+      }
+      @media (max-width: 840px) {
+        .hero-grid,
+        .grid-2 {
+          grid-template-columns: 1fr;
         }
-        .card {
-          background: #161b22;
-          border-color: #30363d;
-          box-shadow: none;
+        .topbar-inner {
+          height: auto;
+          padding: 10px 0;
+          gap: 10px;
+          flex-direction: column;
+          align-items: flex-start;
         }
-        p {
-          color: #9da7b3;
-        }
-        .badge {
-          background: #0c2d6b;
-          color: #c9d1d9;
+        .nav {
+          gap: 12px;
+          flex-wrap: wrap;
         }
       }
     </style>
   </head>
   <body>
-    <main class="card">
-      <h1>你好，GitHub Pages 👋</h1>
-      <p>这是一个最简静态网页示例。你现在看到的页面会通过 GitHub Actions 自动部署到 GitHub Pages。</p>
-      <span class="badge">部署日期：2026-03-19</span>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand" id="brand">我的主页</div>
+        <nav class="nav">
+          <a href="#home">首页</a>
+          <a href="#about">关于我</a>
+          <a href="#skills">技能</a>
+          <a href="#projects">项目</a>
+          <a href="#contact">联系</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero" id="home">
+        <div class="hero-grid">
+          <article class="card">
+            <h1 id="heroName">你好，我是某某 👋</h1>
+            <p class="subtitle" id="heroIntro">这是一个结构化的个人主页示例，你可以快速替换文字、链接、技能和项目内容。</p>
+            <div class="chips" id="tags"></div>
+            <div class="actions">
+              <a class="btn primary" id="primaryLink" href="#projects">查看项目</a>
+              <a class="btn" id="secondaryLink" href="#contact">联系我</a>
+            </div>
+          </article>
+          <aside class="card about" id="about">
+            <h2>个人介绍</h2>
+            <p id="aboutText">这里展示你的背景、兴趣方向和正在做的事。内容建议 2-4 句，便于招聘方或合作伙伴快速了解你。</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section" id="skills">
+        <div class="card">
+          <h2>技能栈</h2>
+          <div class="grid-2">
+            <ul class="list" id="skillListA"></ul>
+            <ul class="list" id="skillListB"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="card">
+          <h2>项目展示</h2>
+          <div class="project-list" id="projectList"></div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="card">
+          <h2>联系我</h2>
+          <ul class="list" id="contactList"></ul>
+        </div>
+      </section>
+
+      <footer class="footer" id="footerText"></footer>
     </main>
+
+    <script>
+      const pageConfig = {
+        brand: "Jiale · Portfolio",
+        name: "你好，我是 Jiale 👋",
+        intro: "一名前端开发爱好者，关注网页体验、工程效率和可维护性。这个页面可直接作为你的 GitHub Pages 个人主页模板。",
+        about:
+          "我喜欢将复杂需求拆解成清晰结构，并通过简洁设计提升信息传达效率。平时会持续学习 Web 性能优化、组件化开发和自动化部署。",
+        tags: ["静态网页", "GitHub Pages", "前端开发", "自动部署"],
+        actions: {
+          primary: { text: "查看项目", href: "#projects" },
+          secondary: { text: "联系我", href: "#contact" }
+        },
+        skills: [
+          "HTML / CSS / JavaScript",
+          "响应式布局与基础可访问性",
+          "Git 与 GitHub 协作",
+          "GitHub Actions 自动部署",
+          "组件化思维与模块拆分",
+          "页面性能与体验优化"
+        ],
+        projects: [
+          {
+            title: "个人主页模板",
+            description: "一个可配置、可快速改文案和链接的静态主页，适合部署在 GitHub Pages。"
+          },
+          {
+            title: "Demo 项目",
+            description: "用于展示你的技术方案、实现细节和业务价值，可替换为真实项目。"
+          }
+        ],
+        contacts: [
+          "GitHub: https://github.com/jiale-ly",
+          "Email: your-email@example.com",
+          "Location: China"
+        ],
+        footer: `© ${new Date().getFullYear()} Jiale. Built with static HTML.`
+      };
+
+      document.title = pageConfig.brand;
+      document.getElementById("brand").textContent = pageConfig.brand;
+      document.getElementById("heroName").textContent = pageConfig.name;
+      document.getElementById("heroIntro").textContent = pageConfig.intro;
+      document.getElementById("aboutText").textContent = pageConfig.about;
+
+      const tagsEl = document.getElementById("tags");
+      pageConfig.tags.forEach((tag) => {
+        const chip = document.createElement("span");
+        chip.className = "chip";
+        chip.textContent = tag;
+        tagsEl.appendChild(chip);
+      });
+
+      const primaryLink = document.getElementById("primaryLink");
+      primaryLink.textContent = pageConfig.actions.primary.text;
+      primaryLink.href = pageConfig.actions.primary.href;
+
+      const secondaryLink = document.getElementById("secondaryLink");
+      secondaryLink.textContent = pageConfig.actions.secondary.text;
+      secondaryLink.href = pageConfig.actions.secondary.href;
+
+      const splitIndex = Math.ceil(pageConfig.skills.length / 2);
+      const skillListA = document.getElementById("skillListA");
+      const skillListB = document.getElementById("skillListB");
+      pageConfig.skills.slice(0, splitIndex).forEach((skill) => {
+        const li = document.createElement("li");
+        li.textContent = skill;
+        skillListA.appendChild(li);
+      });
+      pageConfig.skills.slice(splitIndex).forEach((skill) => {
+        const li = document.createElement("li");
+        li.textContent = skill;
+        skillListB.appendChild(li);
+      });
+
+      const projectList = document.getElementById("projectList");
+      pageConfig.projects.forEach((project) => {
+        const item = document.createElement("article");
+        item.className = "project-item";
+        item.innerHTML = `<strong>${project.title}</strong><p>${project.description}</p>`;
+        projectList.appendChild(item);
+      });
+
+      const contactList = document.getElementById("contactList");
+      pageConfig.contacts.forEach((contact) => {
+        const li = document.createElement("li");
+        li.textContent = contact;
+        contactList.appendChild(li);
+      });
+
+      document.getElementById("footerText").textContent = pageConfig.footer;
+    </script>
   </body>
 </html>
