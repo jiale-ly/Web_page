@@ -71,8 +71,11 @@
         background: var(--primary-soft);
         color: var(--primary);
       }
+      .main {
+        padding: 56px 0;
+      }
       .hero {
-        padding: 56px 0 22px;
+        padding: 22px 0;
       }
       .hero-layout {
         display: grid;
@@ -118,7 +121,7 @@
         padding: 12px 0;
       }
       .section-carousel {
-        margin-top: -10px;
+        margin-top: 0;
       }
       .section h2 {
         margin: 0 0 12px;
@@ -178,7 +181,8 @@
       }
       .carousel-track {
         position: relative;
-        height: 360px;
+        width: 100%;
+        aspect-ratio: 16 / 9;
         border-radius: 12px;
         overflow: hidden;
         border: 1px solid var(--line);
@@ -296,12 +300,6 @@
         .grid {
           grid-template-columns: 1fr;
         }
-        .section-carousel {
-          margin-top: -6px;
-        }
-        .carousel-track {
-          height: 320px;
-        }
       }
       @media (max-width: 800px) {
         .topbar-inner {
@@ -327,7 +325,7 @@
       </div>
     </header>
 
-    <main class="container">
+    <main class="container main">
       <section class="section section-carousel">
         <div class="card">
           <h2>动态轮播图</h2>
