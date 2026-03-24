@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jiale · 多页面主页</title>
+    <title>主页 · Jiale</title>
     <style>
       :root {
         --bg: #f6f8fb;
@@ -117,6 +117,9 @@
       .section {
         padding: 12px 0;
       }
+      .section-carousel {
+        margin-top: -10px;
+      }
       .section h2 {
         margin: 0 0 12px;
         font-size: 1.15rem;
@@ -170,12 +173,12 @@
         color: var(--text-sub);
       }
       .carousel {
-        margin-top: 14px;
+        margin-top: 8px;
         position: relative;
       }
       .carousel-track {
         position: relative;
-        height: 280px;
+        height: 360px;
         border-radius: 12px;
         overflow: hidden;
         border: 1px solid var(--line);
@@ -293,6 +296,12 @@
         .grid {
           grid-template-columns: 1fr;
         }
+        .section-carousel {
+          margin-top: -6px;
+        }
+        .carousel-track {
+          height: 320px;
+        }
       }
       @media (max-width: 800px) {
         .topbar-inner {
@@ -362,7 +371,7 @@
         </div>
       </section>
 
-      <section class="section">
+      <section class="section section-carousel">
         <div class="card">
           <h2>动态轮播图</h2>
           <p class="subtitle">自动轮播每 4 秒切换，支持手动前后切换和圆点定位。</p>
