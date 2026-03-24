@@ -218,16 +218,16 @@
         opacity: 0.92;
       }
       .slide.theme-1 {
-        background: linear-gradient(120deg, #1d4ed8, #22d3ee);
+        background: url("./assets/images/carousel/slide-01.jpg") center / cover no-repeat;
       }
       .slide.theme-2 {
-        background: linear-gradient(120deg, #7c3aed, #ec4899);
+        background: url("./assets/images/carousel/slide-02.png") center / cover no-repeat;
       }
       .slide.theme-3 {
-        background: linear-gradient(120deg, #059669, #84cc16);
+        background: url("./assets/images/carousel/slide-03.png") center / cover no-repeat;
       }
       .slide.theme-4 {
-        background: linear-gradient(120deg, #ea580c, #eab308);
+        background: url("./assets/images/carousel/slide-04.png") center / cover no-repeat;
       }
       .carousel-btn {
         position: absolute;
@@ -328,6 +328,44 @@
     </header>
 
     <main class="container">
+      <section class="section section-carousel">
+        <div class="card">
+          <h2>动态轮播图</h2>
+          <p class="subtitle">自动轮播每 4 秒切换，支持手动前后切换和圆点定位。</p>
+          <div class="carousel" id="home-carousel">
+            <div class="carousel-track">
+              <article class="slide theme-1 is-active">
+                <div class="slide-content">
+                  <strong>多页面清晰导航</strong>
+                  <p>首页、项目、联系、关于，入口明确，访问路径直观。</p>
+                </div>
+              </article>
+              <article class="slide theme-2">
+                <div class="slide-content">
+                  <strong>轻量前端体验</strong>
+                  <p>无需打包工具即可实现交互，快速部署到静态托管平台。</p>
+                </div>
+              </article>
+              <article class="slide theme-3">
+                <div class="slide-content">
+                  <strong>视觉简洁统一</strong>
+                  <p>统一色彩变量和卡片布局，页面风格保持一致。</p>
+                </div>
+              </article>
+              <article class="slide theme-4">
+                <div class="slide-content">
+                  <strong>便于持续扩展</strong>
+                  <p>后续可以接入真实接口或数据库，不改整体结构。</p>
+                </div>
+              </article>
+            </div>
+            <button class="carousel-btn prev" type="button" aria-label="上一张">‹</button>
+            <button class="carousel-btn next" type="button" aria-label="下一张">›</button>
+            <div class="carousel-dots" aria-label="轮播定位"></div>
+          </div>
+        </div>
+      </section>
+
       <section class="hero">
         <div class="hero-layout">
           <article class="card">
@@ -368,44 +406,6 @@
               <button class="btn" id="poem-next" type="button">换一句</button>
             </div>
           </aside>
-        </div>
-      </section>
-
-      <section class="section section-carousel">
-        <div class="card">
-          <h2>动态轮播图</h2>
-          <p class="subtitle">自动轮播每 4 秒切换，支持手动前后切换和圆点定位。</p>
-          <div class="carousel" id="home-carousel">
-            <div class="carousel-track">
-              <article class="slide theme-1 is-active">
-                <div class="slide-content">
-                  <strong>多页面清晰导航</strong>
-                  <p>首页、项目、联系、关于，入口明确，访问路径直观。</p>
-                </div>
-              </article>
-              <article class="slide theme-2">
-                <div class="slide-content">
-                  <strong>轻量前端体验</strong>
-                  <p>无需打包工具即可实现交互，快速部署到静态托管平台。</p>
-                </div>
-              </article>
-              <article class="slide theme-3">
-                <div class="slide-content">
-                  <strong>视觉简洁统一</strong>
-                  <p>统一色彩变量和卡片布局，页面风格保持一致。</p>
-                </div>
-              </article>
-              <article class="slide theme-4">
-                <div class="slide-content">
-                  <strong>便于持续扩展</strong>
-                  <p>后续可以接入真实接口或数据库，不改整体结构。</p>
-                </div>
-              </article>
-            </div>
-            <button class="carousel-btn prev" type="button" aria-label="上一张">‹</button>
-            <button class="carousel-btn next" type="button" aria-label="下一张">›</button>
-            <div class="carousel-dots" aria-label="轮播定位"></div>
-          </div>
         </div>
       </section>
 
