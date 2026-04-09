@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>对比展示入口 · Jiale</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --surface: rgba(255, 255, 255, 0.92);
+        --text-main: #18202a;
+        --text-sub: #5c6773;
+        --line: #d5dde7;
+        --primary: #0d6efd;
+        --primary-soft: #dcebff;
+        --accent: #18a999;
+        --radius: 18px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0b1016;
+          --surface: rgba(20, 26, 35, 0.9);
+          --text-main: #e7edf5;
+          --text-sub: #9ba8b6;
+          --line: #2d3642;
+          --primary: #74a9ff;
+          --primary-soft: #132b4f;
+          --accent: #39d0bb;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        color: var(--text-main);
+        background:
+          radial-gradient(circle at top left, rgba(13, 110, 253, 0.14), transparent 32%),
+          radial-gradient(circle at top right, rgba(24, 169, 153, 0.14), transparent 28%),
+          var(--bg);
+      }
+      .container {
+        width: min(1160px, 94vw);
+        margin: 0 auto;
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--line);
+        background: color-mix(in srgb, var(--bg) 84%, transparent);
+      }
+      .topbar-inner {
+        min-height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .brand {
+        font-weight: 800;
+      }
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .nav a {
+        text-decoration: none;
+        color: var(--text-sub);
+        padding: 8px 12px;
+        border-radius: 999px;
+      }
+      .nav a:hover,
+      .nav a.active {
+        color: var(--primary);
+        background: var(--primary-soft);
+      }
+      .main {
+        padding: 34px 0 44px;
+      }
+      .hero,
+      .card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+      }
+      .hero {
+        padding: 26px;
+      }
+      .eyebrow {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        color: var(--primary);
+        background: var(--primary-soft);
+        font-size: 0.85rem;
+      }
+      h1 {
+        margin: 12px 0 0;
+        font-size: clamp(2rem, 4vw, 3.3rem);
+        line-height: 1.1;
+      }
+      .lead {
+        margin-top: 12px;
+        color: var(--text-sub);
+        line-height: 1.8;
+      }
+      .grid {
+        margin-top: 16px;
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .card {
+        padding: 20px;
+      }
+      .tag {
+        display: inline-block;
+        font-size: 0.8rem;
+        color: var(--accent);
+        border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--line));
+        background: color-mix(in srgb, var(--accent) 12%, transparent);
+        border-radius: 999px;
+        padding: 4px 8px;
+      }
+      .card h2 {
+        margin: 10px 0 0;
+        font-size: 1.15rem;
+      }
+      .card p {
+        margin: 10px 0 0;
+        color: var(--text-sub);
+        line-height: 1.75;
+      }
+      .actions {
+        margin-top: 16px;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 14px;
+        border-radius: 12px;
+        border: 1px solid var(--primary);
+        text-decoration: none;
+        color: #fff;
+        background: var(--primary);
+      }
+      .tips {
+        margin-top: 16px;
+        border: 1px dashed var(--line);
+        border-radius: 14px;
+        padding: 14px;
+        color: var(--text-sub);
+        line-height: 1.8;
+      }
+      .tips strong {
+        color: var(--text-main);
+      }
+      .footer {
+        margin-top: 16px;
+        color: var(--text-sub);
+        font-size: 0.9rem;
+      }
+      @media (max-width: 860px) {
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">Jiale · Web</div>
+        <nav class="nav">
+          <a href="./index.html">首页</a>
+          <a href="./projects.html">项目</a>
+          <a href="./contact.html">联系</a>
+          <a href="./about.html">关于</a>
+          <a class="active" href="./compare.html">对比展示</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container main">
+      <section class="hero">
+        <span class="eyebrow">对比展示入口</span>
+        <h1>选择你要给客户演示的对比方式</h1>
+        <p class="lead">
+          你可以使用“并列多图对比”展示同一张图在不同算法下的整体差异，也可以使用“左右滑块前后对比”演示原图与单个算法结果的局部变化。
+        </p>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <span class="tag">模式 A</span>
+          <h2>并列多图对比</h2>
+          <p>同一张样本，输入图 + 多个算法结果并排展示，适合快速横向比较算法之间的整体风格差异。</p>
+          <div class="actions">
+            <a class="btn" href="./compare-grid.html">进入并列对比</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <span class="tag">模式 B</span>
+          <h2>左右滑块前后对比</h2>
+          <p>输入图在左、算法结果在右，拖动滑块即可看局部变化，适合给客户解释边缘、纹理和细节处理效果。</p>
+          <div class="actions">
+            <a class="btn" href="./compare-slider.html">进入滑块对比</a>
+          </div>
+        </article>
+      </section>
+
+      <section class="tips">
+        <strong>扩展接口说明：</strong>
+        所有样本和算法目录都来自共享配置文件 [assets/js/compare-config.js](assets/js/compare-config.js)；后续新增算法文件夹或图片名时，只需改这一处配置即可，两种展示模式会自动同步。
+      </section>
+
+      <p class="footer">© 2026 Jiale · Compare modes entry</p>
+    </main>
+  </body>
+</html>

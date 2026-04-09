@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>并列多图对比 · Jiale</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --surface: rgba(255, 255, 255, 0.92);
+        --text-main: #18202a;
+        --text-sub: #5c6773;
+        --line: #d5dde7;
+        --primary: #0d6efd;
+        --primary-soft: #dcebff;
+        --radius: 16px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0b1016;
+          --surface: rgba(20, 26, 35, 0.9);
+          --text-main: #e7edf5;
+          --text-sub: #9ba8b6;
+          --line: #2d3642;
+          --primary: #74a9ff;
+          --primary-soft: #132b4f;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        color: var(--text-main);
+        background: var(--bg);
+      }
+      .container {
+        width: min(1240px, 94vw);
+        margin: 0 auto;
+      }
+      .topbar {
+        border-bottom: 1px solid var(--line);
+        background: color-mix(in srgb, var(--bg) 88%, transparent);
+      }
+      .topbar-inner {
+        min-height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .brand {
+        font-weight: 800;
+      }
+      .nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .nav a {
+        text-decoration: none;
+        color: var(--text-sub);
+        padding: 8px 12px;
+        border-radius: 999px;
+      }
+      .nav a:hover,
+      .nav a.active {
+        color: var(--primary);
+        background: var(--primary-soft);
+      }
+      .main {
+        padding: 20px 0 36px;
+      }
+      .toolbar {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        margin-bottom: 14px;
+      }
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+      .field label {
+        color: var(--text-sub);
+        font-size: 0.92rem;
+      }
+      select,
+      .btn {
+        min-height: 42px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+        color: var(--text-main);
+        padding: 0 12px;
+      }
+      .btn {
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+      }
+      .grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        overflow: hidden;
+      }
+      .card header {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        align-items: center;
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+      }
+      .badge {
+        font-size: 0.78rem;
+        color: var(--primary);
+        background: var(--primary-soft);
+        border-radius: 999px;
+        padding: 4px 8px;
+      }
+      .image {
+        aspect-ratio: 4 / 3;
+        background: #111;
+      }
+      .image img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+      .note {
+        padding: 10px 12px;
+        color: var(--text-sub);
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+      @media (max-width: 980px) {
+        .grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (max-width: 700px) {
+        .toolbar,
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">Jiale · Web</div>
+        <nav class="nav">
+          <a href="./compare.html">对比入口</a>
+          <a class="active" href="./compare-grid.html">并列对比</a>
+          <a href="./compare-slider.html">滑块对比</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container main">
+      <div class="toolbar">
+        <div class="field">
+          <label for="sample-select">当前样本</label>
+          <select id="sample-select"></select>
+        </div>
+        <a class="btn" href="./compare-slider.html">切到滑块模式</a>
+      </div>
+
+      <section class="grid" id="compare-grid"></section>
+    </main>
+
+    <script src="./assets/js/compare-config.js"></script>
+    <script>
+      const catalog = window.CompareCatalog;
+      const sampleSelect = document.querySelector("#sample-select");
+      const compareGrid = document.querySelector("#compare-grid");
+
+      if (!catalog) {
+        compareGrid.innerHTML = "<p>配置文件加载失败：assets/js/compare-config.js</p>";
+      } else {
+        const sampleIds = catalog.getSampleIds();
+        const input = catalog.getInput();
+        const algorithms = catalog.getAlgorithms();
+
+        const datasets = [
+          { key: input.key, label: input.label, note: "原始输入图像", buildPath: (id) => catalog.buildInputPath(id) },
+          ...algorithms.map((item) => ({
+            key: item.key,
+            label: item.label,
+            note: item.note,
+            buildPath: (id) => catalog.buildAlgorithmPath(item.key, id)
+          }))
+        ];
+
+        const render = (sampleId) => {
+          compareGrid.innerHTML = datasets
+            .map(
+              (item) => `
+                <article class="card">
+                  <header>
+                    <strong>${item.label}</strong>
+                    <span class="badge">${item.key}</span>
+                  </header>
+                  <div class="image">
+                    <img src="${item.buildPath(sampleId)}" alt="${item.label} - ${sampleId}" />
+                  </div>
+                  <div class="note">${item.note || "-"}</div>
+                </article>
+              `
+            )
+            .join("");
+        };
+
+        sampleIds.forEach((sampleId) => {
+          const option = document.createElement("option");
+          option.value = sampleId;
+          option.textContent = sampleId;
+          sampleSelect.appendChild(option);
+        });
+
+        sampleSelect.addEventListener("change", () => render(sampleSelect.value));
+        sampleSelect.value = sampleIds[0];
+        render(sampleIds[0]);
+      }
+    </script>
+  </body>
+</html>

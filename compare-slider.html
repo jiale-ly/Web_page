@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滑块前后对比 · Jiale</title>
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --surface: rgba(255, 255, 255, 0.92);
+        --text-main: #18202a;
+        --text-sub: #5c6773;
+        --line: #d5dde7;
+        --primary: #0d6efd;
+        --primary-soft: #dcebff;
+        --radius: 16px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0b1016;
+          --surface: rgba(20, 26, 35, 0.9);
+          --text-main: #e7edf5;
+          --text-sub: #9ba8b6;
+          --line: #2d3642;
+          --primary: #74a9ff;
+          --primary-soft: #132b4f;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        color: var(--text-main);
+        background: var(--bg);
+      }
+      .container {
+        width: min(1180px, 94vw);
+        margin: 0 auto;
+      }
+      .topbar {
+        border-bottom: 1px solid var(--line);
+        background: color-mix(in srgb, var(--bg) 88%, transparent);
+      }
+      .topbar-inner {
+        min-height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .brand {
+        font-weight: 800;
+      }
+      .nav {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .nav a {
+        text-decoration: none;
+        color: var(--text-sub);
+        padding: 8px 12px;
+        border-radius: 999px;
+      }
+      .nav a:hover,
+      .nav a.active {
+        color: var(--primary);
+        background: var(--primary-soft);
+      }
+      .main {
+        padding: 20px 0 36px;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        overflow: hidden;
+      }
+      .toolbar {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding: 14px;
+        border-bottom: 1px solid var(--line);
+      }
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+      .field label {
+        color: var(--text-sub);
+        font-size: 0.9rem;
+      }
+      select,
+      input[type="range"] {
+        min-height: 40px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--surface);
+        color: var(--text-main);
+      }
+      .stage {
+        position: relative;
+        aspect-ratio: 16 / 10;
+        background: #111;
+        --reveal: 50%;
+      }
+      .layer {
+        position: absolute;
+        inset: 0;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+      .layer.overlay {
+        width: var(--reveal);
+        overflow: hidden;
+        border-right: 2px solid rgba(255, 255, 255, 0.92);
+      }
+      .label {
+        position: absolute;
+        top: 12px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      .label.left {
+        left: 12px;
+      }
+      .label.right {
+        right: 12px;
+      }
+      .handle {
+        position: absolute;
+        top: 0;
+        left: var(--reveal);
+        width: 0;
+        height: 100%;
+        pointer-events: none;
+      }
+      .handle::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -1px;
+        width: 2px;
+        background: rgba(255, 255, 255, 0.95);
+      }
+      .knob {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translate(-50%, -50%);
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.95);
+        background: rgba(0, 0, 0, 0.45);
+        color: #fff;
+        display: grid;
+        place-items: center;
+      }
+      .meta {
+        padding: 12px 14px 14px;
+        color: var(--text-sub);
+        line-height: 1.7;
+      }
+      .meta strong {
+        color: var(--text-main);
+      }
+      @media (max-width: 860px) {
+        .toolbar {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <div class="brand">Jiale · Web</div>
+        <nav class="nav">
+          <a href="./compare.html">对比入口</a>
+          <a href="./compare-grid.html">并列对比</a>
+          <a class="active" href="./compare-slider.html">滑块对比</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container main">
+      <section class="panel">
+        <div class="toolbar">
+          <div class="field">
+            <label for="sample-select">样本</label>
+            <select id="sample-select"></select>
+          </div>
+          <div class="field">
+            <label for="algorithm-select">算法</label>
+            <select id="algorithm-select"></select>
+          </div>
+          <div class="field">
+            <label for="range-input">滑块位置</label>
+            <input id="range-input" type="range" min="0" max="100" value="50" />
+          </div>
+        </div>
+
+        <div class="stage" id="stage">
+          <div class="layer" id="base-layer"></div>
+          <div class="layer overlay" id="overlay-layer"></div>
+          <span class="label left">输入图</span>
+          <span class="label right" id="right-label">算法结果</span>
+          <div class="handle" id="handle"><div class="knob">↔</div></div>
+        </div>
+
+        <div class="meta" id="meta"></div>
+      </section>
+    </main>
+
+    <script src="./assets/js/compare-config.js"></script>
+    <script>
+      const catalog = window.CompareCatalog;
+      const stage = document.querySelector("#stage");
+      const baseLayer = document.querySelector("#base-layer");
+      const overlayLayer = document.querySelector("#overlay-layer");
+      const sampleSelect = document.querySelector("#sample-select");
+      const algorithmSelect = document.querySelector("#algorithm-select");
+      const rightLabel = document.querySelector("#right-label");
+      const rangeInput = document.querySelector("#range-input");
+      const meta = document.querySelector("#meta");
+
+      if (!catalog) {
+        meta.textContent = "配置文件加载失败：assets/js/compare-config.js";
+      } else {
+        const samples = catalog.getSampleIds();
+        const algorithms = catalog.getAlgorithms();
+
+        samples.forEach((sampleId) => {
+          const option = document.createElement("option");
+          option.value = sampleId;
+          option.textContent = sampleId;
+          sampleSelect.appendChild(option);
+        });
+
+        algorithms.forEach((algorithm) => {
+          const option = document.createElement("option");
+          option.value = algorithm.key;
+          option.textContent = `${algorithm.label} (${algorithm.key})`;
+          algorithmSelect.appendChild(option);
+        });
+
+        const setReveal = () => {
+          const value = `${rangeInput.value}%`;
+          stage.style.setProperty("--reveal", value);
+          overlayLayer.style.setProperty("--reveal", value);
+        };
+
+        const render = () => {
+          const sampleId = sampleSelect.value;
+          const algorithmKey = algorithmSelect.value;
+          const algorithm = algorithms.find((item) => item.key === algorithmKey);
+
+          baseLayer.style.backgroundImage = `url("${catalog.buildInputPath(sampleId)}")`;
+          overlayLayer.style.backgroundImage = `url("${catalog.buildAlgorithmPath(algorithmKey, sampleId)}")`;
+          rightLabel.textContent = algorithm.label;
+          meta.innerHTML = `<strong>${algorithm.label}</strong>：${algorithm.note || "-"}`;
+          setReveal();
+        };
+
+        sampleSelect.value = samples[0];
+        algorithmSelect.value = algorithms[0].key;
+
+        sampleSelect.addEventListener("change", render);
+        algorithmSelect.addEventListener("change", render);
+        rangeInput.addEventListener("input", setReveal);
+
+        render();
+      }
+    </script>
+  </body>
+</html>
