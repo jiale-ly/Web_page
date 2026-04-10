@@ -205,7 +205,7 @@
           </div>
           <div class="field">
             <label for="range-input">滑块位置</label>
-            <input id="range-input" type="range" min="0" max="100" value="50" />
+            <input id="range-input" type="range" min="0" max="100" value="30" />
           </div>
         </div>
 
@@ -264,8 +264,8 @@
           const algorithmKey = algorithmSelect.value;
           const algorithm = algorithms.find((item) => item.key === algorithmKey);
 
-          baseLayer.style.backgroundImage = `url("${catalog.buildInputPath(sampleId)}")`;
-          overlayLayer.style.backgroundImage = `url("${catalog.buildAlgorithmPath(algorithmKey, sampleId)}")`;
+          baseLayer.style.backgroundImage = `url("${catalog.buildAlgorithmPath(algorithmKey, sampleId)}")`;
+          overlayLayer.style.backgroundImage = `url("${catalog.buildInputPath(sampleId)}")`;
           rightLabel.textContent = algorithm.label;
           meta.innerHTML = `<strong>${algorithm.label}</strong>：${algorithm.note || "-"}`;
           setReveal();
