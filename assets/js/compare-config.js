@@ -23,10 +23,11 @@
     },
     // Add future algorithm folders here.
     algorithms: [
-      { key: "1840output", label: "算法 1", folder: "1840output", ext: "png", note: "观察清晰度和边缘保留。" },
-      { key: "1900output", label: "算法 2", folder: "1900output", ext: "png", note: "平滑和纹理增强对比。" },
-      { key: "output_ac", label: "算法 3", folder: "output_ac", ext: "png", note: "更稳定统一的视觉输出。" },
-      { key: "output_ac_unresize", label: "算法 4", folder: "output_ac_unresize", ext: "png", note: "未 resize 的原始输出。" }
+      { key: "IPC", label: "算法IPC", folder: "IPC", ext: "png", note: "预测器-评价器迭代解码" },
+      { key: "1840output", label: "算法LHTD", folder: "1840output", ext: "png", note: "LHTD普通扩散模型" },
+      { key: "1900output", label: "算法LHTD", folder: "1900output", ext: "png", note: "LHTD优化后" },
+      { key: "output_ac", label: "算法LHTD", folder: "output_ac", ext: "png", note: "更稳定统一的视觉输出。" },
+      { key: "output_ac_unresize", label: "算法LHTD", folder: "output_ac_unresize", ext: "png", note: "未 resize 的原始输出。" }
     ]
   };
 
