@@ -204,7 +204,7 @@
         ];
 
         const render = (sampleId) => {
-          compareGrid.innerHTML = datasets
+          const html = datasets
             .map(
               (item) => `
                 <article class="card">
@@ -213,13 +213,23 @@
                     <span class="badge">${item.key}</span>
                   </header>
                   <div class="image">
-                    <img src="${item.buildPath(sampleId)}" alt="${item.label} - ${sampleId}" />
+                    <img src="" alt="${item.label} - ${sampleId}" loading="lazy" onerror="this.style.display='none'" />
                   </div>
                   <div class="note">${item.note || "-"}</div>
                 </article>
               `
             )
             .join("");
+          compareGrid.innerHTML = html;
+          // Defer image src assignment to the next frame so the browser
+          // can paint the card skeleton first, avoiding a long main-thread
+          // block when multiple large images need to be fetched.
+          requestAnimationFrame(() => {
+            const images = compareGrid.querySelectorAll(".image img");
+            images.forEach((img, idx) => {
+              img.src = datasets[idx].buildPath(sampleId);
+            });
+          });
         };
 
         sampleIds.forEach((sampleId) => {

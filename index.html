@@ -232,18 +232,6 @@
         margin: 0;
         opacity: 0.92;
       }
-      .slide.theme-1 {
-        background: url("./assets/images/carousel/slide-01.jpg") center / cover no-repeat;
-      }
-      .slide.theme-2 {
-        background: url("./assets/images/carousel/slide-02.png") center / cover no-repeat;
-      }
-      .slide.theme-3 {
-        background: url("./assets/images/carousel/slide-03.png") center / cover no-repeat;
-      }
-      .slide.theme-4 {
-        background: url("./assets/images/carousel/slide-04.png") center / cover no-repeat;
-      }
       .carousel-btn {
         position: absolute;
         top: 50%;
@@ -466,12 +454,24 @@
           let current = 0;
           let timer = null;
 
+          // Slide backgrounds are set dynamically so that only the active slide
+          // downloads its image. The first slide's background is set immediately.
+          const slideBackgrounds = [
+            "./assets/images/carousel/slide-01.jpg",
+            "./assets/images/carousel/slide-02.png",
+            "./assets/images/carousel/slide-03.png",
+            "./assets/images/carousel/slide-04.png"
+          ];
+          slides[0].style.backgroundImage = `url("${slideBackgrounds[0]}")`;
+
           const showSlide = (nextIndex) => {
             slides[current].classList.remove("is-active");
             dots[current].classList.remove("active");
             current = (nextIndex + slides.length) % slides.length;
             slides[current].classList.add("is-active");
             dots[current].classList.add("active");
+            // Load background image lazily when the slide becomes active
+            slides[current].style.backgroundImage = `url("${slideBackgrounds[current]}")`;
           };
 
           const startAuto = () => {
@@ -489,10 +489,7 @@
           nextBtn.addEventListener("click", () => showSlide(current + 1));
           dots.forEach((dot, idx) => dot.addEventListener("click", () => showSlide(idx)));
           carousel.addEventListener("mouseenter", stopAuto);
-          carousel.addEventListener("mouseleave", () => {
-            stopAuto();
-            startAuto();
-          });
+          carousel.addEventListener("mouseleave", startAuto);
 
           startAuto();
         }
@@ -541,7 +538,9 @@
 
         if (poemLine && poemMeta && poemNext) {
           poemNext.addEventListener("click", renderRandomPoem);
-          window.setInterval(renderRandomPoem, 5000);
+          const poemInterval = window.setInterval(renderRandomPoem, 5000);
+          // Clean up the interval when the page is unloading.
+          window.addEventListener("beforeunload", () => window.clearInterval(poemInterval));
           renderRandomPoem();
         }
       })();

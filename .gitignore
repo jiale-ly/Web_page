@@ -1,0 +1,16 @@
+# Image data (large binary files, hundreds of MB)
+image_data/
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Editor backups
+*~
+*.swp
+*.swo

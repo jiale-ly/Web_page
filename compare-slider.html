@@ -257,7 +257,6 @@
         const setReveal = () => {
           const value = `${rangeInput.value}%`;
           stage.style.setProperty("--reveal", value);
-          overlayLayer.style.setProperty("--reveal", value);
         };
 
         const render = () => {
@@ -269,7 +268,18 @@
           overlayLayer.style.backgroundImage = `url("${catalog.buildInputPath(sampleId)}")`;
           rightLabel.textContent = algorithm.label;
           meta.innerHTML = `<strong>${algorithm.label}</strong>：${algorithm.note || "-"}`;
-          setReveal();
+        };
+
+        // Use rAF-batched input handler to avoid updating CSS custom properties
+        // on every single input event (which fires 60–120 times/sec during drag).
+        let rafId = null;
+        const onRangeInput = () => {
+          if (!rafId) {
+            rafId = requestAnimationFrame(() => {
+              setReveal();
+              rafId = null;
+            });
+          }
         };
 
         sampleSelect.value = samples[0];
@@ -277,7 +287,7 @@
 
         sampleSelect.addEventListener("change", render);
         algorithmSelect.addEventListener("change", render);
-        rangeInput.addEventListener("input", setReveal);
+        rangeInput.addEventListener("input", onRangeInput);
 
         render();
       }
