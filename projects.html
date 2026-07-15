@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
   <head>
+    <link rel="dns-prefetch" href="https://unpkg.com" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>项目 · Jiale</title>
@@ -69,6 +70,7 @@
         border-radius: var(--radius);
         padding: 20px;
       }
+      .grid > article { content-visibility: auto; contain-intrinsic-size: 200px; contain: layout style paint; }
       .card h3 { margin: 0 0 8px; }
       .card p { margin: 0; color: var(--text-sub); line-height: 1.7; }
       .tag {

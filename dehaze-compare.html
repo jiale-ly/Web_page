@@ -126,6 +126,7 @@
         cursor: pointer;
         user-select: none;
         transition: all 0.15s;
+        will-change: background-color, color, border-color;
       }
       .tab:hover {
         color: var(--primary);
@@ -163,6 +164,7 @@
         place-items: center;
         user-select: none;
         transition: all 0.15s;
+        will-change: transform, background-color, color, border-color;
       }
       .frame-nav .nav-btn:hover {
         background: var(--primary-soft);
@@ -204,12 +206,15 @@
         gap: 12px;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         margin-bottom: 10px;
+        content-visibility: auto;
+        contain-intrinsic-size: 800px;
       }
       .card {
         border: 1px solid var(--line);
         border-radius: var(--radius);
         background: var(--surface);
         overflow: hidden;
+        contain: layout style paint;
       }
       .card header {
         display: flex;
@@ -293,6 +298,7 @@
         width: var(--reveal);
         overflow: hidden;
         border-right: 2px solid rgba(255, 255, 255, 0.92);
+        will-change: width;
       }
       .label-badge {
         position: absolute;

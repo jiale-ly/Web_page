@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="zh-CN">
   <head>
+    <link rel="prefetch" href="./compare-grid.html" as="document" />
+    <link rel="prefetch" href="./compare-slider.html" as="document" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>对比展示入口 · Jiale</title>
@@ -84,6 +86,7 @@
       .card {
         border: 1px solid var(--line);
         border-radius: var(--radius);
+        contain: layout style paint;
         background: var(--surface);
       }
       .hero {
@@ -149,6 +152,7 @@
         color: #fff;
         background: var(--primary);
       }
+      .card { contain: layout style paint; }
       .tips {
         margin-top: 16px;
         border: 1px dashed var(--line);
@@ -156,6 +160,7 @@
         padding: 14px;
         color: var(--text-sub);
         line-height: 1.8;
+        contain: layout style paint;
       }
       .tips strong {
         color: var(--text-main);

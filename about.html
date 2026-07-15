@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
   <head>
+    <link rel="dns-prefetch" href="https://unpkg.com" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>个人简历 · Jiale</title>
@@ -63,6 +64,7 @@
         border: 1px solid var(--line);
         border-radius: var(--radius);
         padding: 24px;
+        contain: layout style paint;
       }
       h1 { margin-top: 0; margin-bottom: 12px; }
       h2 {
@@ -86,11 +88,13 @@
         gap: 14px;
         grid-template-columns: 1.2fr 0.8fr;
       }
+      .layout > div { content-visibility: auto; contain-intrinsic-size: 500px; contain: layout style paint; }
       .section {
         border: 1px solid var(--line);
         border-radius: 12px;
         padding: 16px;
         background: color-mix(in srgb, var(--surface) 90%, transparent);
+        contain: layout style paint;
       }
       .section + .section {
         margin-top: 12px;
@@ -117,6 +121,7 @@
         color: var(--primary);
         background: var(--primary-soft);
         border: 1px solid color-mix(in srgb, var(--primary) 25%, var(--line));
+        will-change: background-color, color;
       }
       .footer {
         margin-top: 24px;

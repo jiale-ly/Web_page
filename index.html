@@ -1,7 +1,11 @@
 <!doctype html>
 <html lang="zh-CN">
   <head>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="dns-prefetch" href="https://unpkg.com" />
     <meta charset="UTF-8" />
+    <link rel="prefetch" href="./projects.html" as="document" />
+    <link rel="prefetch" href="./about.html" as="document" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>主页 · Jiale</title>
     <style>
@@ -87,9 +91,10 @@
         border: 1px solid var(--line);
         border-radius: var(--radius);
         padding: 24px;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-      }
-      h1 {
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    }
+      .is-offscreen { content-visibility: auto; contain-intrinsic-size: 400px; }
+    h1 {
         margin: 0;
         font-size: clamp(1.9rem, 3vw, 2.6rem);
       }
@@ -129,6 +134,7 @@
         gap: 14px;
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
+      .grid article { contain: layout style paint; }
       .mini {
         border: 1px solid var(--line);
         border-radius: 12px;
@@ -207,6 +213,8 @@
         padding: 24px;
         display: flex;
         align-items: flex-end;
+        will-change: opacity, transform;
+        contain: layout style paint;
       }
       .slide::before {
         content: "";
@@ -243,6 +251,7 @@
         background: color-mix(in srgb, var(--surface) 80%, transparent);
         color: var(--text-main);
         cursor: pointer;
+        will-change: transform, opacity;
       }
       .carousel-btn.prev {
         left: 10px;
@@ -266,6 +275,9 @@
       }
       .carousel-dots button.active {
         background: var(--primary);
+      }
+      .carousel-dots button {
+        will-change: background-color;
       }
       .poem-widget {
         margin-top: 14px;
@@ -386,7 +398,7 @@
       </section>
 
       <section class="section">
-        <div class="card" id="app">
+        <div class="card is-offscreen" id="app">
           <h2>Vue 3 轻交互预览</h2>
           <p class="subtitle">点击下方按钮切换展示卡片，保留纯静态部署体验，同时具备前沿框架的动态能力。</p>
           <div class="actions">
@@ -462,17 +474,25 @@
             "./assets/images/carousel/slide-03.png",
             "./assets/images/carousel/slide-04.png"
           ];
-          slides[0].style.backgroundImage = `url("${slideBackgrounds[0]}")`;
+    slides[0].style.backgroundImage = `url("${slideBackgrounds[0]}")`;
 
-          const showSlide = (nextIndex) => {
-            slides[current].classList.remove("is-active");
-            dots[current].classList.remove("active");
-            current = (nextIndex + slides.length) % slides.length;
-            slides[current].classList.add("is-active");
-            dots[current].classList.add("active");
-            // Load background image lazily when the slide becomes active
-            slides[current].style.backgroundImage = `url("${slideBackgrounds[current]}")`;
-          };
+      // Preload next slide for snappier transition
+      const preloadSlideImage = (index) => {
+        const img = new Image();
+        img.src = slideBackgrounds[index];
+      };
+      preloadSlideImage(1);
+
+      const showSlide = (nextIndex) => {
+        slides[current].classList.remove("is-active");
+        dots[current].classList.remove("active");
+        current = (nextIndex + slides.length) % slides.length;
+        slides[current].classList.add("is-active");
+        dots[current].classList.add("active");
+        slides[current].style.backgroundImage = `url("${slideBackgrounds[current]}")`;
+        const nextIdx = (current + 1) % slides.length;
+        preloadSlideImage(nextIdx);
+      };
 
           const startAuto = () => {
             timer = window.setInterval(() => showSlide(current + 1), 4000);

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="zh-CN">
   <head>
+    <link rel="dns-prefetch" href="https://unpkg.com" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>联系 · Jiale</title>
@@ -63,11 +64,13 @@
         grid-template-columns: 1fr 1fr;
         gap: 14px;
       }
+      .layout > div { content-visibility: auto; contain-intrinsic-size: 300px; contain: layout style paint; }
       .card {
         background: var(--surface);
         border: 1px solid var(--line);
         border-radius: var(--radius);
         padding: 22px;
+        contain: layout style paint;
       }
       h1, h2 { margin: 0 0 10px; }
       p { margin: 0; color: var(--text-sub); line-height: 1.8; }
